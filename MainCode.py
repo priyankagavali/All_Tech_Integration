@@ -1,4 +1,5 @@
 import os
+import subprocess
 import getpass
 while True:
 	print("""
@@ -251,7 +252,7 @@ while True:
 	elif ask==3:
 		os.system('systemctl start docker')
 		os.system('docker create -it --name pythonos ubuntu')
-		os.system('docker start rohan_python')
+		os.system('docker start pythonos')
 		os.system('docker exec -it pythonos apt-get update')
 		os.system('docker exec -it pythonos apt-get install python3 -y')
 		os.system('docker exec -it pythonos apt-get install wget')
@@ -385,6 +386,8 @@ while True:
 
 
 	elif ask==8:
+		
+		
 		print("""
 	press 1.  to install docker
 	press 2.  to list docker images
@@ -405,6 +408,7 @@ while True:
 	press 17. to remove all the containers
 	press 18. to check logs of container """)
 
+		
 		ask = int(input("enter your choice :- "))	
 		if ask==1:
 			a='yum install docker-ce --nobest'
@@ -525,7 +529,7 @@ while True:
 			image1= input("enter the file name :- ")
 			b="""aws s3api put-object --acl public-read-write --bucket bb1 --key {} --body {}""".format(image1,image)
 			os.system(b)
-			s3="https://rohan1231231.s3.ap-south-1.amazonaws.com/{}".format(image)
+			s3="https://bb1.s3.ap-south-1.amazonaws.com/{}".format(image)
 			print(s3)
 
 		elif ask1==4:
@@ -577,6 +581,7 @@ while True:
 	press 1. binary_search
 	press 2. linear_search""")
 		ask12=int(input("enter option"))
+		
 		if ask12==1:
 			def binarySearch (arr, l, r, x): 
 				if r >= l: 
