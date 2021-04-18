@@ -1,6 +1,9 @@
 import os
-import subprocess
+import socket
+import threading
 import getpass
+import subprocess
+
 while True:
 	print("""
 	press 0:  *DSA
@@ -18,7 +21,8 @@ while True:
 	press 10: To setup lvm
 	press 11: To resize the Lvm
 	press 12: webserver(vm)
-	press 13: exit
+	press 13: Chat Application
+	press 14: exit
 	#############################################
 	""")
 	ask=int(input("enter your choice"))
@@ -252,7 +256,7 @@ while True:
 	elif ask==3:
 		os.system('systemctl start docker')
 		os.system('docker create -it --name pythonos ubuntu')
-		os.system('docker start pythonos')
+		os.system('docker start rohan_python')
 		os.system('docker exec -it pythonos apt-get update')
 		os.system('docker exec -it pythonos apt-get install python3 -y')
 		os.system('docker exec -it pythonos apt-get install wget')
@@ -386,8 +390,6 @@ while True:
 
 
 	elif ask==8:
-		
-		
 		print("""
 	press 1.  to install docker
 	press 2.  to list docker images
@@ -408,7 +410,6 @@ while True:
 	press 17. to remove all the containers
 	press 18. to check logs of container """)
 
-		
 		ask = int(input("enter your choice :- "))	
 		if ask==1:
 			a='yum install docker-ce --nobest'
@@ -529,7 +530,7 @@ while True:
 			image1= input("enter the file name :- ")
 			b="""aws s3api put-object --acl public-read-write --bucket bb1 --key {} --body {}""".format(image1,image)
 			os.system(b)
-			s3="https://bb1.s3.ap-south-1.amazonaws.com/{}".format(image)
+			s3="https://rohan1231231.s3.ap-south-1.amazonaws.com/{}".format(image)
 			print(s3)
 
 		elif ask1==4:
@@ -581,7 +582,6 @@ while True:
 	press 1. binary_search
 	press 2. linear_search""")
 		ask12=int(input("enter option"))
-		
 		if ask12==1:
 			def binarySearch (arr, l, r, x): 
 				if r >= l: 
@@ -617,10 +617,55 @@ while True:
 			Lsearch(arr,x)
 
 		else:
-			print("wrong entry...!")
+			#print("wrong entry...!")
 
 
-	elif ask==13:
+    elif ask==13:
+
+        import socket 
+		import threading
+		print('\n\t\t\t...Welcome To Chat Application...\t\t\t\n')
+
+		s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+		ip=input("enter your ip: ")
+		port=int(input("enter your port: "))
+		s.bind((ip,port))
+		server_ip=input("enter server ip: ")
+		server_port=int(input("enter server port: "))
+		
+		def send():
+		while True:
+			data=input("enter msg:")
+			s.sendto(data.encode(),(server_ip,server_port))
+			print("\n\t\t\t\t\t\t\tSent : " ,data)
+			if data == "exit":
+					os._exit(1)
+
+
+
+		def receive():
+		while True: 
+		data=s.recvfrom(1024)
+		if data == "exit":
+					os._exit(1)
+
+		print('\n\t\t\t\t\t\t\tReceived : ' + data[0].decode())
+
+
+		thread1 = threading.Thread(target=send)
+		thread2 = threading.Thread(target=receive)
+		thread1.start()
+		thread2.start()
+
+
+
+
+
+
+
+    
+
+    elif ask==14:
 		break
 
 
