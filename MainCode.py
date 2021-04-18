@@ -13,9 +13,11 @@ while True:
 	press 4:  *To configure webserver (container)
 	Press 5:  *Integrate Lvm With Hadoop
 	press 6:  *Hadoop options(*Client,NameNode,DataNode)
+	
 	#############################################
 	press 7: AWS Options
 	press 8: Docker options
+	
 	#############################################
 	press 9:  Yum configure
 	press 10: To setup lvm
@@ -23,8 +25,11 @@ while True:
 	press 12: webserver(vm)
 	press 13: Chat Application
 	press 14: exit
+	
 	#############################################
 	""")
+	
+	
 	ask=int(input("enter your choice"))
 	if ask==1:
 		import subprocess
@@ -90,6 +95,7 @@ while True:
 				os.system(a)
 				a='sshpass -p {} ssh {} hadoop-daemon.sh start namenode'.format(passs,ask31)
 				os.system(a)
+				
 			elif i==1:
 				ask3=hyt[i]
 				passs=pyt[i]
@@ -187,6 +193,7 @@ while True:
 				os.system('sshpass -p {} ssh {} systemctl disable firewalld'.format(passs,ask3))		
 				os.system('sshpass -p {} ssh {} hadoop-daemon.sh start datanode'.format(passs,ask3))
 
+	
 	elif ask==11:
 
 		print("""
@@ -241,7 +248,9 @@ while True:
 		gght='mount /dev/'+name+'/'+partname+' '+mo
 		os.system(gght)
 
-	elif ask==4:	
+	
+	elif ask==4:
+		
 		os.system('systemctl start docker')
 		os.system('docker create -it --name webos1 ubuntu')
 		os.system('docker start rohan_webserver')
@@ -268,6 +277,7 @@ while True:
 		os.system('docker exec -it pythonos python3 /salary.py')
 
 	elif ask==9:
+		
 		print("""
 	press 1. rhel8 disk
 	Press 2. docker""")
@@ -337,45 +347,57 @@ while True:
 		press 14. (Mode)to leave safe mode
 	""")
 
-		ask = int(input("enter your choice :- "))	
+		ask = int(input("enter your choice :- "))
+		
+		
 		if ask==1:
 			ask1=input("full path of source file :- ")
 			ask2=input("full path of destination :- ")
 			a='hadoop fs -put {} {}'.format(ask1,ask2)
 			os.system(a)
+			
 		if ask==2:
 			ask2=input("path where you want to create file :- ")
 			a='hadoop fs -touchz {}'.format(ask2)
 			os.system(a)
+			
 		if ask==3:
 			ask2=input("in which location you want to list :- ")
 			a='hadoop fs -ls {}'.format(ask2)
 			os.system(a)
+			
 		if ask==4:
 			ask2=input("path where you want to create folder :- ")
 			a='hadoop fs -mkdir {}'.format(ask2)
 			os.system(a)
+			
 		if ask==5:
 			ask2=input("file path you want to read :- ")
 			a='hadoop fs -cat {}'.format(ask2)
 			os.system(a)
+			
 		if ask==6:
 			ask1=input("File Path :- ")
 			a='hadoop fs -rm {}'.format(ask1)
 			os.system(a)
+			
 		if ask==7:
 			ask1=input("Folder Path :- ")
 			a='hadoop fs -rmr {}'.format(ask1)
 			os.system(a)
+			
 		if ask==8:
 			a='hadoop-daemon.sh stop namenode'
 			os.system(a)
+			
 		if ask==9:
 			a='hadoop-daemon.sh start namenode'
 			os.system(a)
+			
 		if ask==10:
 			a='hadoop namenode -format'
 			os.system(a)
+			
 		if ask==11:
 			os.system('hadoop dfsadmin -report')
 
@@ -390,6 +412,8 @@ while True:
 
 
 	elif ask==8:
+		
+		
 		print("""
 	press 1.  to install docker
 	press 2.  to list docker images
@@ -410,37 +434,47 @@ while True:
 	press 17. to remove all the containers
 	press 18. to check logs of container """)
 
-		ask = int(input("enter your choice :- "))	
+		ask = int(input("enter your choice :- "))
+		
 		if ask==1:
 			a='yum install docker-ce --nobest'
 			os.system(a)
+			
 		if ask==2:
 			os.system('docker images')
+			
 		if ask==3:
 			os.system('systemctl start docker')
+			
 		if ask==4:
 			os.system('systemctl stop docker')
+			
 		if ask==5:
 			ask1=input("enter the image name :- ")
 			a='docker pull {}'.format(ask1)
 			os.system(a)
+			
 		if ask==6:
 			ask1=input("enter the image name :- ")
 			a='docker search {}'.format(ask1)
 			os.system(a)
+			
 		if ask==7:
 			name = input("enter the name of container :- ")
 			image = input("enter the image name which you want to use :- ")
 			a='docker run -it --name {} {}'.format(name,image)
 			os.system(a)
+			
 		if ask==8:
 			name = input("enter the name of container :- ")
 			a = 'docker start {}'.format(name)
 			os.system(a)
+			
 		if ask==9:
 			name = input("enter the name of container :- ")
 			a = 'docker stop {}'.format(name)
 			os.system(a)
+			
 		if ask==10:
 			name = input("enter the name of container :- ")
 			a = 'docker exec -it {} /bin/bash'.format(name)
@@ -449,16 +483,19 @@ while True:
 		if ask==11:
 			a='docker ps'
 			os.system(a)
+			
 		if ask==12:
 			a='docker ps -a'
 			os.system(a)
+			
 		if ask==13:
 			image = input("enter image name :- ")
 			a='docker rmi {}'.format(image)
 			os.system(a)
 
 		if ask==14:
-			os.system('docker info')	
+			os.system('docker info')
+			
 		if ask==15:	
 			name = input("enter the name of container :- ")
 			a='docker inspect {}'.format(name)
@@ -581,7 +618,9 @@ while True:
 		print("""
 	press 1. binary_search
 	press 2. linear_search""")
+		
 		ask12=int(input("enter option"))
+		
 		if ask12==1:
 			def binarySearch (arr, l, r, x): 
 				if r >= l: 
@@ -624,6 +663,7 @@ while True:
 
         import socket 
 		import threading
+		
 		print('\n\t\t\t...Welcome To Chat Application...\t\t\t\n')
 
 		s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
